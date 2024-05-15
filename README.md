@@ -25,3 +25,6 @@ Dashboard: Features a user-friendly web dashboard built with React.js, allowing 
 Deployment and Scalability:
 
 > The CTA is cloud-ready, with configurations available for deployment on major cloud platforms such as AWS, Google Cloud, and Azure. This ensures high availability and scalability to handle varying loads and multiple markets simultaneously.
+
+## To-do:
+*Running on it's own blockchain*
