@@ -28,3 +28,55 @@ Deployment and Scalability:
 
 ## To-do:
 *Running on it's own blockchain*
+
+``` CTA/
+│
+├── docs/                     # Documentation files
+│   ├── setup.md
+│   ├── usage.md
+│   └── config-examples.md
+│
+├── src/                      # Source files
+│   ├── api/                  # API integration modules
+│   │   ├── binance/
+│   │   │   ├── client.py
+│   │   │   └── models.py
+│   │   ├── coinbase/
+│   │   │   ├── client.py
+│   │   │   └── models.py
+│   │   └── common.py         # Shared API functionalities
+│   │
+│   ├── bot/                  # Trading bot logic
+│   │   ├── trader.py         # Trading operations
+│   │   ├── strategy.py       # Trading strategies
+│   │   ├── config.py         # Configuration handling
+│   │   └── scheduler.py      # Scheduling trading actions
+│   │
+│   ├── db/                   # Database related modules
+│   │   ├── database.py       # Database connections
+│   │   └── models.py         # ORM models
+│   │
+│   ├── tests/                # Automated tests
+│   │   ├── test_api.py
+│   │   ├── test_bot.py
+│   │   └── test_db.py
+│   │
+│   └── main.py               # Main module to run the bot
+│
+├── config/                   # Configuration files
+│   ├── default.json          # Default configuration
+│   └── production.json       # Production-specific configuration
+│
+├── logs/                     # Log files
+│   └── trading.log
+│
+├── scripts/                  # Scripts for deployment and maintenance
+│   ├── deploy.sh
+│   └── setup.sh
+│
+├── Dockerfile                # Dockerfile for containerization
+├── docker-compose.yml        # Docker-compose file for local deployment
+├── .gitignore                # Specifies intentionally untracked files to ignore
+├── LICENSE                   # License file
+└── README.md                 # The top-level description of the project
+```
