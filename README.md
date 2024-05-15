@@ -1,0 +1,2 @@
+# CTA
+Crypto Trading Agent
