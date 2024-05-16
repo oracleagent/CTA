@@ -1,0 +1,12 @@
+
+# Trading Log
+
+This log file will record all trading activities, errors, and important events.
+
+# Sample Entry:
+# Date: 2024-05-15
+# Action: Buy
+# Symbol: BTC-USD
+# Price: 45000.00
+# Quantity: 0.1
+# Status: Successful
