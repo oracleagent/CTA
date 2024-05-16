@@ -2,7 +2,7 @@ requests==2.25.1
 pandas==1.2.4
 SQLAlchemy==1.4.15
 APScheduler==3.6.3
-ccxt==1.42.75
+ccxt==4.3.23
 pytest==6.2.4
 python-dotenv==0.17.0
 loguru==0.5.3
