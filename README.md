@@ -26,6 +26,25 @@ Deployment and Scalability:
 
 > The CTA is cloud-ready, with configurations available for deployment on major cloud platforms such as AWS, Google Cloud, and Azure. This ensures high availability and scalability to handle varying loads and multiple markets simultaneously.
 
+## Installation Guide
+
+To get started with the installation, please refer to the [Installation Guide](install.md).
+
+## Features
+
+- Real-time trading
+- Multiple exchange support (Binance, Coinbase)
+- Backtesting capabilities
+- Risk management
+- Performance metrics
+
+## Usage
+
+After installing the bot, you can start it by running:
+
+```sh
+python -m src.main
+
 ## To-do:
 *Running on it's own blockchain*
 
