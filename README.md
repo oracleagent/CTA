@@ -30,53 +30,68 @@ Deployment and Scalability:
 *Running on it's own blockchain*
 
 ``` CTA/
-│
-├── docs/                     # Documentation files
-│   ├── setup.md
-│   ├── usage.md
-│   └── config-examples.md
-│
-├── src/                      # Source files
-│   ├── api/                  # API integration modules
-│   │   ├── binance/
-│   │   │   ├── client.py
-│   │   │   └── models.py
-│   │   ├── coinbase/
-│   │   │   ├── client.py
-│   │   │   └── models.py
-│   │   └── common.py         # Shared API functionalities
-│   │
-│   ├── bot/                  # Trading bot logic
-│   │   ├── trader.py         # Trading operations
-│   │   ├── strategy.py       # Trading strategies
-│   │   ├── config.py         # Configuration handling
-│   │   └── scheduler.py      # Scheduling trading actions
-│   │
-│   ├── db/                   # Database related modules
-│   │   ├── database.py       # Database connections
-│   │   └── models.py         # ORM models
-│   │
-│   ├── tests/                # Automated tests
-│   │   ├── test_api.py
-│   │   ├── test_bot.py
-│   │   └── test_db.py
-│   │
-│   └── main.py               # Main module to run the bot
-│
-├── config/                   # Configuration files
-│   ├── default.json          # Default configuration
-│   └── production.json       # Production-specific configuration
-│
-├── logs/                     # Log files
-│   └── trading.log
-│
-├── scripts/                  # Scripts for deployment and maintenance
-│   ├── deploy.sh
-│   └── setup.sh
-│
-├── Dockerfile                # Dockerfile for containerization
-├── docker-compose.yml        # Docker-compose file for local deployment
-├── .gitignore                # Specifies intentionally untracked files to ignore
-├── LICENSE                   # License file
-└── README.md                 # The top-level description of the project
+.
+├── README.md               # Project overview and instructions
+├── config
+│   ├── default.json        # Default configuration settings
+│   └── production.json     # Production-specific configuration settings
+├── docs
+│   ├── config-examples.md  # Example configuration files and explanations
+│   ├── setup.md            # Setup instructions
+│   └── usage.md            # Usage instructions
+├── logs
+│   └── trading.log         # Log file for trading activity
+├── scripts
+│   ├── deploy.sh           # Deployment script
+│   └── setup.sh            # Setup script
+├── setup.py                # Package setup and installation
+├── requirements.txt        # List of dependencies for the project
+└── src
+    ├── alerts.py           # Handles alerts and notifications
+    ├── api
+    │   ├── api_manager.py  # Manages API interactions
+    │   ├── binance
+    │   │   ├── client.py   # Binance API client implementation
+    │   │   └── models.py   # Binance API models and data structures
+    │   ├── coinbase
+    │   │   └── client.py   # Coinbase API client implementation
+    │   └── common.py       # Common API functionalities shared across exchanges
+    ├── backtesting.py      # Backtesting trading strategies
+    ├── bot
+    │   ├── config.py       # Configuration handling for the bot
+    │   ├── logging.py      # Logging setup and management
+    │   ├── scheduler.py    # Scheduling trading actions
+    │   ├── strategy.py     # Trading strategies implementation
+    │   └── trader.py       # Core trading operations
+    ├── dashboard_interface.py # Interface for the trading dashboard
+    ├── data_storage.py     # Data storage and retrieval
+    ├── db
+    │   ├── database.py     # Database connections and setup
+    │   └── models.py       # ORM models for database interaction
+    ├── event_handler.py    # Event handling and management
+    ├── historical_data_fetcher.py # Fetches historical market data
+    ├── logging_manager.py  # Manages logging for the application
+    ├── main.py             # Main entry point for running the bot
+    ├── market_analysis.py  # Analyzes market data for trading decisions
+    ├── notification_service.py # Service for sending notifications
+    ├── order_manager.py    # Manages order placements and executions
+    ├── performance_metrics.py # Tracks and reports performance metrics
+    ├── risk_management.py  # Implements risk management strategies
+    ├── session_manager.py  # Manages trading sessions
+    ├── strategy_optimizer.py # Optimizes trading strategies
+    ├── tests
+    │   ├── conftest.py     # Configuration for tests
+    │   ├── test_api.py     # Tests for API interactions
+    │   ├── test_bot.py     # Tests for bot functionalities
+    │   ├── test_db.py      # Tests for database interactions
+    │   ├── test_integration.py # Integration tests
+    │   └── test_trader.py  # Tests for trading operations
+    ├── trade_execution.py  # Executes trades based on strategy decisions
+    ├── ui
+    │   └── dashboard.py    # Dashboard UI for monitoring and control
+    ├── user_settings.py    # Manages user settings and preferences
+    └── utils
+        ├── error_handling.py # Error handling utilities
+        └── notifications.py # Notification utilities
+
 ```
