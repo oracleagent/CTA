@@ -1,0 +1,54 @@
+{
+    "apiSettings": {
+        "exchangeAPIs": {
+            "binance": {
+                "apiKey": "your_binance_api_key_here",
+                "secretKey": "your_binance_secret_key_here",
+                "baseUrl": "https://api.binance.com",
+                "timeout": 15000
+            },
+            "coinbase": {
+                "apiKey": "your_coinbase_api_key_here",
+                "secretKey": "your_coinbase_secret_key_here",
+                "baseUrl": "https://api.pro.coinbase.com",
+                "timeout": 15000
+            }
+        }
+    },
+    "database": {
+        "host": "localhost",
+        "port": 27017,
+        "dbName": "tradingBot",
+        "user": "admin",
+        "password": "securepassword"
+    },
+    "tradingParameters": {
+        "riskManagement": {
+            "maxTradeAmount": 1000,
+            "minTradeAmount": 50,
+            "stopLossPercentage": 2,
+            "takeProfitPercentage": 3
+        },
+        "strategyParameters": {
+            "tradingStrategy": "statisticalArbitrage",
+            "volatilityAdjustmentEnabled": true
+        },
+        "machineLearning": {
+            "useMachineLearning": true,
+            "modelType": "reinforcementLearning"
+        }
+    },
+    "logging": {
+        "logLevel": "info",
+        "logFile": "logs/trading.log"
+    },
+    "performanceMonitoring": {
+        "metricsEnabled": true,
+        "metricsFrequency": "daily"
+    },
+    "infrastructure": {
+        "lowLatencyMode": true,
+        "redundancyEnabled": true,
+        "securityMeasures": "high"
+    }
+}

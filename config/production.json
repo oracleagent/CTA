@@ -1,0 +1,54 @@
+{
+    "apiSettings": {
+        "exchangeAPIs": {
+            "binance": {
+                "apiKey": "your_production_binance_api_key_here",
+                "secretKey": "your_production_binance_secret_key_here",
+                "baseUrl": "https://api.binance.com",
+                "timeout": 10000
+            },
+            "coinbase": {
+                "apiKey": "your_production_coinbase_api_key_here",
+                "secretKey": "your_production_coinbase_secret_key_here",
+                "baseUrl": "https://api.pro.coinbase.com",
+                "timeout": 10000
+            }
+        }
+    },
+    "database": {
+        "host": "production_db_host",
+        "port": 27017,
+        "dbName": "tradingBotProduction",
+        "user": "productionUser",
+        "password": "productionSecurePassword"
+    },
+    "tradingParameters": {
+        "riskManagement": {
+            "maxTradeAmount": 5000,
+            "minTradeAmount": 100,
+            "stopLossPercentage": 1,
+            "takeProfitPercentage": 2
+        },
+        "strategyParameters": {
+            "tradingStrategy": "statisticalArbitrage",
+            "volatilityAdjustmentEnabled": true
+        },
+        "machineLearning": {
+            "useMachineLearning": true,
+            "modelType": "reinforcementLearning"
+        }
+    },
+    "logging": {
+        "logLevel": "warn",
+        "logFile": "logs/trading_production.log"
+    },
+    "performanceMonitoring": {
+        "metricsEnabled": true,
+        "metricsFrequency": "hourly"
+    },
+    "infrastructure": {
+        "lowLatencyMode": true,
+        "redundancyEnabled": true,
+        "securityMeasures": "high"
+    }
+}
