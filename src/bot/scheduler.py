@@ -1,5 +1,6 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from trader import Trader
+from db.models import create_tables, Trade, Order, Configuration, session
 import logging
 
 class Scheduler:
@@ -12,26 +13,38 @@ class Scheduler:
         """
         Start the scheduler with predefined jobs.
         """
-        # Schedule the trader run method to execute every minute
-        self.scheduler.add_job(self.trader.run, 'interval', minutes=1)
+        try:
+            # Schedule the trader run method to execute every minute
+            self.scheduler.add_job(self.trader.run, 'interval', minutes=1)
 
-        # Add more scheduled jobs if needed here
-        self.scheduler.start()
-        logging.info("Scheduler started, running jobs.")
+            # Add more scheduled jobs if needed here
+            self.scheduler.start()
+            logging.info("Scheduler started, running jobs.")
+        except Exception as e:
+            logging.error(f"Error starting scheduler: {e}")
 
     def shutdown(self):
         """
         Shut down the scheduler when the app is stopping.
         """
-        self.scheduler.shutdown()
-        logging.info("Scheduler shut down.")
+        try:
+            self.scheduler.shutdown()
+            logging.info("Scheduler shut down.")
+        except Exception as e:
+            logging.error(f"Error shutting down scheduler: {e}")
 
 # Example usage
 if __name__ == "__main__":
-    client = None  # Initialize your trading client
-    strategy = None  # Initialize your trading strategy
+    logging.basicConfig(level=logging.INFO)
+    create_tables()  # Ensure the database tables are created
+
+    # Initialize your trading client and strategy
+    client = None  # Replace with actual trading client initialization
+    strategy = None  # Replace with actual trading strategy initialization
+
     trader = Trader(client, strategy)
     sched = Scheduler(trader)
+    
     try:
         sched.start()
     except (KeyboardInterrupt, SystemExit):
