@@ -44,7 +44,7 @@ After installing the bot, you can start it by running:
 
 ```sh
 python -m src.main
-
+```
 ## To-do:
 *Running on it's own blockchain*
 
