@@ -25,4 +25,4 @@ setup(
             'start-bot=src.main:main',
         ],
     },
-)
+)" > setup.py
