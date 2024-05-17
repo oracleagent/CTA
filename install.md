@@ -41,6 +41,7 @@ python-dotenv==0.17.0
 loguru==0.5.3
 websocket-client==0.59.0
 ujson==4.0.2
+web3==5.27.0
 ```
 
 ## Step 4: Install Dependencies
@@ -77,6 +78,7 @@ setup(
         'loguru==0.5.3',
         'websocket-client==0.59.0',
         'ujson==4.0.2'
+        'web3==5.27.0'
     ],
     entry_points={
         'console_scripts': [
