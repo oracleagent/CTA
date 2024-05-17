@@ -12,6 +12,10 @@
                 "secretKey": "your_coinbase_secret_key_here",
                 "baseUrl": "https://api.pro.coinbase.com",
                 "timeout": 15000
+            },
+            "metamask": {
+                "privateKey": "your_metamask_private_key",
+                "rpcUrl": "https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID"
             }
         }
     },

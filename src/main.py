@@ -1,25 +1,25 @@
 import os
 import sys
 import signal
+import json
+from dotenv import load_dotenv
 from api.binance.client import BinanceClient
+from api.coinbase.client import CoinbaseClient
+from api.metamask.client import MetaMaskClient
 from bot.trader import Trader
 from bot.strategy import AdvancedStrategy
 from bot.scheduler import Scheduler
 from db.database import Database
 import logging
 from bot.logging import setup_logging
-from api.metamask import MetaMask  # Import MetaMask
+
+# Load environment variables from .env file
+load_dotenv()
 
 def load_configuration():
-    # Placeholder for configuration loading logic
-    return {
-        "db_uri": os.getenv("DB_URI", "mongodb://localhost:27017"),
-        "db_name": os.getenv("DB_NAME", "crypto_trading"),
-        "api_key": os.getenv("BINANCE_API_KEY"),
-        "api_secret": os.getenv("BINANCE_SECRET_KEY"),
-        "infura_url": os.getenv("INFURA_URL"),
-        "metamask_private_key": os.getenv("METAMASK_PRIVATE_KEY")
-    }
+    with open("config/default.json") as config_file:
+        config = json.load(config_file)
+    return config
 
 def handle_shutdown(signum, frame):
     logging.info("Shutdown signal received")
@@ -37,30 +37,25 @@ if __name__ == "__main__":
     signal.signal(signal.SIGTERM, handle_shutdown)
 
     # Initialize database
-    db = Database(uri=config["db_uri"], dbname=config["db_name"])
+    db = Database(uri=f"mongodb://{config['database']['user']}:{config['database']['password']}@{config['database']['host']}:{config['database']['port']}", dbname=config["database"]["dbName"])
 
-    # Initialize API client
-    client = BinanceClient(api_key=config["api_key"], secret_key=config["api_secret"])
+    # Initialize API clients
+    binance_client = BinanceClient(api_key=os.getenv("BINANCE_API_KEY"), secret_key=os.getenv("BINANCE_SECRET_KEY"))
+    coinbase_client = CoinbaseClient(api_key=os.getenv("COINBASE_API_KEY"), secret_key=os.getenv("COINBASE_SECRET_KEY"))
+    metamask_client = MetaMaskClient(os.getenv("METAMASK_PRIVATE_KEY"), os.getenv("INFURA_URL"))
 
     # Initialize trading strategy
-    strategy = AdvancedStrategy(client)
+    strategy = AdvancedStrategy(binance_client)
 
     # Initialize trader
-    trader = Trader(client, strategy)
+    trader = Trader(binance_client, strategy)
 
     # Initialize and start scheduler
     scheduler = Scheduler(trader)
     scheduler.start()
 
-    # MetaMask Integration
-    metamask = MetaMask()
-    balance = metamask.get_balance()
-    logging.info(f"MetaMask Account Balance: {balance} ETH")
-
-    # Send a transaction (for demonstration purposes, adjust accordingly)
-    to_address = '0xRecipientAddressHere'  # Replace with actual recipient address
-    amount = 0.01  # Amount in ETH
-    tx_hash = metamask.send_transaction(to_address, amount)
-    logging.info(f"Transaction sent with hash: {tx_hash}")
-
     logging.info("Trading bot started successfully.")
+
+    # Example MetaMask transaction
+    tx_hash = metamask_client.send_transaction("recipient_address", 0.01, 21000, 50)
+    logging.info(f"MetaMask transaction sent with hash: {tx_hash}")
