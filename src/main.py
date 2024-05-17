@@ -8,6 +8,7 @@ from bot.scheduler import Scheduler
 from db.database import Database
 import logging
 from bot.logging import setup_logging
+from api.metamask import MetaMask  # Import MetaMask
 
 def load_configuration():
     # Placeholder for configuration loading logic
@@ -15,7 +16,9 @@ def load_configuration():
         "db_uri": os.getenv("DB_URI", "mongodb://localhost:27017"),
         "db_name": os.getenv("DB_NAME", "crypto_trading"),
         "api_key": os.getenv("BINANCE_API_KEY"),
-        "api_secret": os.getenv("BINANCE_SECRET_KEY")
+        "api_secret": os.getenv("BINANCE_SECRET_KEY"),
+        "infura_url": os.getenv("INFURA_URL"),
+        "metamask_private_key": os.getenv("METAMASK_PRIVATE_KEY")
     }
 
 def handle_shutdown(signum, frame):
@@ -48,5 +51,16 @@ if __name__ == "__main__":
     # Initialize and start scheduler
     scheduler = Scheduler(trader)
     scheduler.start()
+
+    # MetaMask Integration
+    metamask = MetaMask()
+    balance = metamask.get_balance()
+    logging.info(f"MetaMask Account Balance: {balance} ETH")
+
+    # Send a transaction (for demonstration purposes, adjust accordingly)
+    to_address = '0xRecipientAddressHere'  # Replace with actual recipient address
+    amount = 0.01  # Amount in ETH
+    tx_hash = metamask.send_transaction(to_address, amount)
+    logging.info(f"Transaction sent with hash: {tx_hash}")
 
     logging.info("Trading bot started successfully.")
