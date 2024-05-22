@@ -1,11 +1,13 @@
 import time
-from .strategy import AdvancedStrategy
-from ..api.binance.client import BinanceClient
+import logging
+from api.binance.client import BinanceClient
+from bot.strategy import AdvancedStrategy
 
 class Trader:
     def __init__(self, client, strategy):
         self.client = client
         self.strategy = strategy
+        self.logger = logging.getLogger(__name__)
 
     def fetch_market_data(self):
         """
@@ -20,11 +22,11 @@ class Trader:
         """
         if decision == 'buy':
             # Implement buy logic
-            print("Buying at market price")
+            self.logger.info("Buying at market price")
             self.client.place_order('buy', market_data['price'], market_data['quantity'])
         elif decision == 'sell':
             # Implement sell logic
-            print("Selling at market price")
+            self.logger.info("Selling at market price")
             self.client.place_order('sell', market_data['price'], market_data['quantity'])
 
     def run(self):
@@ -45,7 +47,8 @@ class Trader:
 
 # Example usage
 if __name__ == "__main__":
-    client = BinanceClient(api_key='your_api_key', secret_key='your_secret_key')
+    logging.basicConfig(level=logging.INFO)
+    client = BinanceClient(api_key=os.getenv("BINANCE_API_KEY"), secret_key=os.getenv("BINANCE_SECRET_KEY"))
     strategy = AdvancedStrategy(client)
     trader = Trader(client, strategy)
     trader.run()
